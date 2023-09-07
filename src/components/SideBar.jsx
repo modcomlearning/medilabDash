@@ -11,6 +11,7 @@ const Section = styled.section`
      flex-direction: column;
      width: 25vw;
      left: 0;
+     height: 100%;
      align-items: center;
      justify-content: space-between;
      padding-top:10px;
