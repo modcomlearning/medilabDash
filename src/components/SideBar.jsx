@@ -6,7 +6,7 @@ import {AiTwotoneCopy}  from "react-icons/ai"
 
 //style
 const Section = styled.section`
-     background-color: orange;
+     background-color: #00a6ff;
      display: flex;
      flex-direction: column;
      width: 25vw;
@@ -53,18 +53,45 @@ const Section = styled.section`
                     }
                   }//end hover
                   a{
-                    color:#3498db;
+                    color:#fafcfd;
                     text-decoration: none;
-                     
+                    svg{
+                        fill: #f76c8a;
+                        font-size: 1.5rem;
+                        margin-right: 10px;
+                    } 
                   }
                 }//end li
             }//end ul            
         }//end links
-
-
-
-
      } //end top 
+
+     .bottom{
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+        justify-content: center;
+        background-color: #f76c8a;
+        align-items: center;
+        border-radius : 10px;
+            svg{
+                fill: #fafcfd;
+                font-size: 3rem;
+            }
+            span{
+                color: white;
+            }
+        }//end bottom
+        .logout{
+            display:flex;
+            background-color: white;
+            padding: 5px; width: 6em; display: inline;
+            margin-top: 10px; margin-bottom: 10px;
+            a{
+                text-decoration: none;   
+            }
+        }
 `
 //Style End here
 const SideBar = () => {
