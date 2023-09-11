@@ -8,12 +8,14 @@ import {AiTwotoneCopy}  from "react-icons/ai"
 const Section = styled.section`
      background-color: #00a6ff;
      display: flex;
+     position: fixed;
+     overflow: auto;
+     z-index: 1;
      flex-direction: column;
      width: 25vw;
      left: 0;
      height: 100%;
      align-items: center;
-     justify-content: space-between;
      padding-top:10px;
      .top{
         display:flex ;
@@ -56,6 +58,8 @@ const Section = styled.section`
                   a{
                     color:#fafcfd;
                     text-decoration: none;
+                    display: flex;
+                    align-items: center;
                     svg{
                         fill: #f76c8a;
                         font-size: 1.5rem;
