@@ -1,7 +1,7 @@
 import styled from "styled-components"
 const Main = styled.section`
      display: flex;
-     background-color: cadetblue;
+     background-color: #f7fafb;
      margin-left: 25%;
      width: 75%;
      position: relative;

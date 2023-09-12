@@ -3,7 +3,8 @@ import styled from "styled-components"
 import { AiOutlineAppstore,AiFillAccountBook, AiFillAlert, AiOutlineLogout } from "react-icons/ai"
 import {AiOutlineBank, AiOutlinePlusCircle, AiOutlineUser} from "react-icons/ai"
 import {AiTwotoneCopy}  from "react-icons/ai"
-
+import { Link } from "react-router-dom"
+//sudo npm install react-router-dom@latest
 //style
 const Section = styled.section`
      background-color: #00a6ff;
@@ -45,7 +46,8 @@ const Section = styled.section`
                 list-style-type: none;
                 padding: 1rem;
                 li {
-                  padding: 1rem;
+                  padding: 0.5rem;
+                  margin:5px;
                   border-radius: 0.5rem;
                   text-align: left;
                   &:hover{
@@ -67,7 +69,11 @@ const Section = styled.section`
                     } 
                   }
                 }//end li
-            }//end ul            
+            }//end ul     
+            .active{
+                 background-color: black;
+            }
+            
         }//end links
      } //end top 
 
@@ -102,7 +108,7 @@ const Section = styled.section`
 const SideBar = () => {
     //Hooks
 const [currentLink, setCurrentLink] = useState(1)
-
+    console.log("Current: "+currentLink)
     return ( 
         <Section>
             <div className="top">
@@ -113,27 +119,32 @@ const [currentLink, setCurrentLink] = useState(1)
                 
                 <div className="links">
                     <ul>
-                        <li>
-                              <a href=""><AiOutlinePlusCircle/>Dashboard</a>
+                        <li className={currentLink === 1 ? "active" : "none"}
+                            onClick={() => setCurrentLink(1)}>
+                            
+                              <Link to="/"><AiOutlinePlusCircle/>Dashboard</Link>
+                        </li>
+                        <li className={currentLink === 2 ? "active" : "none"}
+                            onClick={() => setCurrentLink(2)}>
+                            
+                              <Link to="/profile"><AiOutlineAppstore/>My Profile</Link>
+                        </li>
+                        <li className={currentLink === 3 ? "active" : "none"}
+                            onClick={() => setCurrentLink(3)}>
+                              <Link to="/add_tests"><AiTwotoneCopy/>Add Tests</Link>
                         </li>
                         <li>
-                              <a href=""><AiOutlineAppstore/>My Profile</a>
+                            <Link to="/lab_tests"><AiOutlineUser />Lab Tests</Link>
                         </li>
                         <li>
-                              <a href=""><AiTwotoneCopy/>Add Tests</a>
+                              <Link to="/mybookings"><AiOutlinePlusCircle/>My Bookings</Link>
                         </li>
                         <li>
-                              <a href=""><AiOutlineUser/>Lab Tests</a>
-                        </li>
-                        <li>
-                              <a href=""><AiOutlinePlusCircle/>My Bookings</a>
-                        </li>
-                        <li>
-                              <a href=""><AiFillAccountBook/>Add Nurses</a>
+                              <Link to="/add_nurses"><AiFillAccountBook/>Add Nurses</Link>
                         </li>
 
                         <li>
-                              <a href=""><AiFillAlert/>Nurses</a>
+                              <a href="/nurses"><AiFillAlert/>Nurses</a>
                         </li>
                     </ul>                    
                 </div>
