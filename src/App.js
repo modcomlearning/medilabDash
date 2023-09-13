@@ -8,6 +8,7 @@ import TopBar from './components/TopBar';
 import MainContent from './components/MainContent';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Profile from './components/Profile';
+import Signup from './components/Signup';
 const MyH1 = styled.h1`
    color: red;
 `
@@ -20,7 +21,7 @@ function App() {
         {/* Routing will be required here */}
         <Routes>
             <Route path='/' element = {<MainContent/>} ></Route>
-            <Route path='/profile' element = {<Profile/>} ></Route>
+            <Route path='/profile' element = {<Signup/>} ></Route>
         </Routes>  
     
         </div>
