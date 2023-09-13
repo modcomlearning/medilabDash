@@ -25,17 +25,24 @@ const Signup = () => {
                 password:password
             })
             .then(function (response) {
-                console.log(response);
+                console.log(response.data.message);
+                setLoading(false)
+                setSuccess(response.data.message)
+                setEmail(''); setName(''); setPassword(''); setPhone(''); setPermit('');
             })
             .catch(function (error) {
-                console.log(error);
+                console.log(error.message);
+                setLoading(false)
+                setFailure(error.message);
             });
 
     }//End submit
-
     return ( 
         <div className="form">
             <h1>Register Lab</h1>
+              {loading  && <div className="loading"> Please Wait..</div>}
+              {success && <div className="success"> {success}</div>}  
+              {failure && <div className="failure"> { failure}</div>}  
             <form  onSubmit={submit}>
                 <input type="text" placeholder="Enter Lab Name" value={lab_name}
                     onChange={(e) => setName(e.target.value)} required/> <br /><br />
