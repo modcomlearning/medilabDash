@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios"
+import { styled } from "styled-components";
 const Signin = () => {
     //hooks
     const [email, setEmail] = useState(null)
@@ -38,22 +39,36 @@ const Signin = () => {
     }//End submit
     return ( 
         <div className="form">
-            <h1>Register Lab</h1>
+            <Section>
               {loading  && <div className="loading"> Please Wait..</div>}
               {success && <div className="success"> {success}</div>}  
               {failure && <div className="failure"> { failure}</div>}  
-            <form  onSubmit={submit}>
-                <input type="email" placeholder="Enter Email" value={email}
-                    onChange={(e) => setEmail(e.target.value)} required /> <br /><br />
-                
-                <input type="password" placeholder="Enter Password" value={password}
-                    onChange={(e) => setPassword(e.target.value)} required/> <br /><br />
+                <form onSubmit={submit} className="card shadow p-3 pt-4">
+                    <h1>Login Lab</h1>
+                    <div className="card-body">
+                        <input type="email" placeholder="Enter Email" value={email}
+                                onChange={(e) => setEmail(e.target.value)} required
+                            className="form-control"/> <br />
+                        
+                        <input type="password" placeholder="Enter Password" value={password}
+                                onChange={(e) => setPassword(e.target.value)} required
+                            className="form-control"/> <br />
 
-                <button>Login Account</button>
-                
-            </form>
+                        <button className="btn btn-dark">Login Account</button>
+                </div>   
+                </form>
+             </Section>
         </div>
      );
 }
- 
 export default Signin;
+const Section = styled.section`
+     display: flex;
+     flex-direction: column;
+     position: relative;
+     align-items: center;
+     justify-content: center;
+     top: 50px;
+`
+
+

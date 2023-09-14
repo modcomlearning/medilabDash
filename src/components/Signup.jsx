@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios"
+import { styled } from "styled-components";
 const Signup = () => {
     //hooks
     const [lab_name, setName] = useState(null)
@@ -45,31 +46,50 @@ const Signup = () => {
     }//End submit
     return ( 
         <div className="form">
-            <h1>Register Lab</h1>
+             <Section>
+           
               {loading  && <div className="loading"> Please Wait..</div>}
               {success && <div className="success"> {success}</div>}  
               {failure && <div className="failure"> { failure}</div>}  
-            <form  onSubmit={submit}>
+                <form onSubmit={submit} className="card shadow p-3 pt-4">
+                    <h1>Register Lab</h1>
+                     <div className="card-body">
                 <input type="text" placeholder="Enter Lab Name" value={lab_name}
-                    onChange={(e) => setName(e.target.value)} required/> <br /><br />
+                            onChange={(e) => setName(e.target.value)} required
+                        className="form-control"/> <br />
             
                 <input type="text" placeholder="Enter Permit ID" value={permit_id}
-                    onChange={(e) => setPermit(e.target.value)} required/> <br /><br />
+                            onChange={(e) => setPermit(e.target.value)} required
+                        className="form-control"/> <br />
                 
                 <input type="email" placeholder="Enter Email" value={email}
-                    onChange={(e) => setEmail(e.target.value)} required /> <br /><br />
+                            onChange={(e) => setEmail(e.target.value)} required
+                            className="form-control" /> <br />
                 
                 <input type="tel" placeholder="Enter Phone" value={phone}
-                    onChange={(e) => setPhone(e.target.value)} required /> <br /><br />
+                            onChange={(e) => setPhone(e.target.value)} required
+                        className="form-control"/> <br />
             
                 <input type="password" placeholder="Enter Password" value={password}
-                    onChange={(e) => setPassword(e.target.value)} required/> <br /><br />
+                            onChange={(e) => setPassword(e.target.value)} required
+                        className="form-control"/> <br />
 
-                <button>Create Account</button>
-                
-            </form>
+                <button className="btn btn-dark">Create Account</button>
+                </div>
+                </form>
+            </Section>
         </div>
      );
 }
  
 export default Signup;
+const Section = styled.section`
+     display: flex;
+     flex-direction: column;
+     position: relative;
+     align-items: center;
+     justify-content: center;
+     top: 50px;
+     overflow: auto;
+`
+

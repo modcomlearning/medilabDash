@@ -21,8 +21,10 @@ function App() {
         <TopBar />
         {/* Routing will be required here */}
         <Routes>
-            <Route path='/' element = {<Signin/>} ></Route>
-            <Route path='/profile' element = {<Signup/>} ></Route>
+            <Route path='/' element = {<MainContent/>} ></Route>
+            <Route path='/profile' element={<Profile />} ></Route>
+            <Route path='/signin' element={<Signin />} ></Route>
+            <Route path='/signup' element={<Signup />} ></Route>
         </Routes>  
     
         </div>
