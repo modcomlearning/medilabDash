@@ -22,8 +22,18 @@ const Signin = () => {
                 password:password
             })
                 .then(function (response) {
-                console.log(response.data);
-                console.log(response.data.message);
+                console.log("X"+response.data);
+                console.log("Y"+response.data.message.lab_id);
+                console.log("RT" + response.data.refresh_token);
+                  
+                //Assume Login Successfully
+                localStorage.setItem("lab_id", response.data.message.lab_id);
+                localStorage.setItem("refresh_token", response.data.refresh_token);
+                console.log("Saved1" + localStorage.getItem("lab_id")) 
+                console.log("Saved2"+localStorage.getItem("refresh_token"))     
+                //Redirect
+                    
+                //console.log("Lab ID"+response.data.message);
                 setLoading(false)
                 //setSuccess(response.data.message)    
                 //Seesions
