@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios"
 import { styled } from "styled-components";
+import { Link } from "react-router-dom";
 const Signup = () => {
     //hooks
     const [lab_name, setName] = useState(null)
@@ -75,7 +76,8 @@ const Signup = () => {
                         className="form-control"/> <br />
 
                 <button className="btn btn-dark">Create Account</button>
-                </div>
+                    </div>
+                     <Link to="/signin">Already have an Account, Login</Link>
                 </form>
             </Section>
         </div>

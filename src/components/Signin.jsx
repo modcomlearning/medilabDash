@@ -1,8 +1,10 @@
 import { useState } from "react";
 import axios from "axios"
 import { styled } from "styled-components";
+import { Link, Navigate, useNavigate} from 'react-router-dom';
 const Signin = () => {
     //hooks
+    const navigation = useNavigate()// hook
     const [email, setEmail] = useState(null)
     const [password, setPassword] = useState(null)
     const [loading, setLoading] = useState(false)
@@ -35,7 +37,21 @@ const Signin = () => {
                     
                 //console.log("Lab ID"+response.data.message);
                 setLoading(false)
-                //setSuccess(response.data.message)    
+                setSuccess(response.data.message)    
+                    if (!response.data.refresh_token) {
+                         //Redirect to signin or ignore 
+                        console.log("No token")
+                    }
+                    else if (response.data.refresh_token) {
+                        //Navigate /Redirect
+                        console.log("Exist a token")
+                        navigation("/")  //MainContent
+                
+                    }
+
+                    else {
+                         console.log("Something went wrong")
+                    }
                 //Seesions
                 //LocalStorage/SQlite/WebSQL    
             
@@ -50,9 +66,9 @@ const Signin = () => {
     return ( 
         <div className="form">
             <Section>
-              {loading  && <div className="loading"> Please Wait..</div>}
-              {success && <div className="success"> {success}</div>}  
-              {failure && <div className="failure"> { failure}</div>}  
+              {loading  && <div className="text-warning"> Please Wait..</div>}
+              {success && <div className="text-success"> {success}</div>}  
+              {failure && <div className="text-danger"> { failure}</div>}  
                 <form onSubmit={submit} className="card shadow p-3 pt-4">
                     <h1>Login Lab</h1>
                     <div className="card-body">
@@ -65,8 +81,11 @@ const Signin = () => {
                             className="form-control"/> <br />
 
                         <button className="btn btn-dark">Login Account</button>
-                </div>   
+                    </div>   
+                    <Link to="/signup">Don't have an Account, Create</Link>
                 </form>
+                
+            
              </Section>
         </div>
      );

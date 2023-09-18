@@ -18,8 +18,7 @@ function App() {
   return (
     <Router>
         <div className="App">
-        <SideBar />
-        <TopBar />
+        {/* Removed Side and Top bar */}
         {/* Routing will be required here */}
         <Routes>
             <Route path='/' element = {<MainContent/>} ></Route>
