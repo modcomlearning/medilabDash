@@ -10,6 +10,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Profile from './components/Profile';
 import Signup from './components/Signup';
 import Signin from './components/Signin';
+import AddTests from './components/AddTests';
 const MyH1 = styled.h1`
    color: red;
 `
@@ -25,6 +26,7 @@ function App() {
             <Route path='/profile' element={<Profile />} ></Route>
             <Route path='/signin' element={<Signin />} ></Route>
             <Route path='/signup' element={<Signup />} ></Route>
+            <Route path='/add_tests' element={<AddTests />} ></Route>
         </Routes>  
     
         </div>
