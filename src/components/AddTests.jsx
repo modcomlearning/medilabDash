@@ -2,6 +2,7 @@ import { useState } from "react";
 import styled from "styled-components"
 import axios from "axios";
 import Main from "../styles/Main";
+import Layout from "../helpers/Layout";
 
 const AddTests = () => {
       //User Must be loggen in 
@@ -45,7 +46,8 @@ const AddTests = () => {
                 console.log(response.data);
                 setLoading(false)
                 setSuccess(response.data.message)
-               
+                setName(''); setDescription(''); setCost(''); setDiscount(''); setAvailability('');
+                setInfo('');
                 //setEmail(''); setName(''); setPassword(''); setPhone(''); setPermit('');
             })
             .catch(function (error) {
@@ -56,43 +58,45 @@ const AddTests = () => {
 
     }//End submit
 
-
-
-    return ( 
-        <Main>
-            <form onSubmit={submit} className="card shadow p-4">
-                <div className="card-body">
-                        {loading  && <div className="loading"> Please Wait..</div>}
-                        {success && <div className="success"> {success}</div>}  
-                        {failure && <div className="failure"> { failure}</div>} 
-                        <input type="text" placeholder="Enter Test Name" value={test_name}
-                            onChange={(e) => setName(e.target.value)} required
-                        className="form-control"/> <br /> 
-                        
-                        <input type="text" placeholder="Enter Test Desc" value={test_description}
-                            onChange={(e) => setDescription(e.target.value)} required
-                        className="form-control"/> <br />
-                        
-                        <input type="text" placeholder="Enter Test Cost" value={test_cost}
-                            onChange={(e) => setCost(e.target.value)} required
-                        className="form-control"/> <br />
-                        
-                        <input type="text" placeholder="Enter Test Discount" value={test_discount}
-                            onChange={(e) => setDiscount(e.target.value)} required
-                        className="form-control"/> <br />
-                        
-                        <input type="text" placeholder="Enter Test Availability" value={availability}
-                            onChange={(e) => setAvailability(e.target.value)} required
-                        className="form-control"/> <br />
-                        
-                        <input type="text" placeholder="Enter More" value={more_info}
-                            onChange={(e) => setInfo(e.target.value)} required
-                        className="form-control"/> <br /> 
-                        
-                        <button className="btn btn-dark">Add Test</button>
-                </div>
-            </form>
-        </Main>    
+    return (
+        <div>
+                <Layout/>
+                <Main>
+                    <form onSubmit={submit} className="card shadow p-4">
+                        <div className="card-body">
+                                {loading  && <div className="text-warning"> Please Wait..</div>}
+                                {success && <div className="text-success"> {success}</div>}  
+                                {failure && <div className="text-danger"> { failure}</div>} 
+                                <input type="text" placeholder="Enter Test Name" value={test_name}
+                                    onChange={(e) => setName(e.target.value)} required
+                                className="form-control"/> <br /> 
+                                
+                                <input type="text" placeholder="Enter Test Desc" value={test_description}
+                                    onChange={(e) => setDescription(e.target.value)} required
+                                className="form-control"/> <br />
+                                
+                                <input type="text" placeholder="Enter Test Cost" value={test_cost}
+                                    onChange={(e) => setCost(e.target.value)} required
+                                className="form-control"/> <br />
+                                
+                                <input type="text" placeholder="Enter Test Discount" value={test_discount}
+                                    onChange={(e) => setDiscount(e.target.value)} required
+                                className="form-control"/> <br />
+                                
+                                <input type="text" placeholder="Enter Test Availability" value={availability}
+                                    onChange={(e) => setAvailability(e.target.value)} required
+                                className="form-control"/> <br />
+                                
+                                <input type="text" placeholder="Enter More" value={more_info}
+                                    onChange={(e) => setInfo(e.target.value)} required
+                                className="form-control"/> <br /> 
+                                
+                                <button className="btn btn-dark">Add Test</button>
+                        </div>
+                    </form>
+                </Main>  
+        </div>
+        
      );
 
 }
