@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios"
 import { styled } from "styled-components";
 import { Link } from "react-router-dom";
+import axiosInstance from "../helpers/axiosInstance";
 const Signup = () => {
     //hooks
     const [lab_name, setName] = useState(null)
@@ -21,7 +22,7 @@ const Signup = () => {
         setFailure(null)
         console.log("submitting")
             //Post
-            axios.post('https://modcom.pythonanywhere.com/api/lab_signup', {
+            axiosInstance.post('/lab_signup', {
                 lab_name: lab_name,
                 permit_id: permit_id,
                 email: email,
