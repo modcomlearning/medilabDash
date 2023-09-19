@@ -3,6 +3,7 @@ import styled from "styled-components"
 import axios from "axios";
 import Main from "../styles/Main";
 import Layout from "../helpers/Layout";
+import axiosInstance from "../helpers/axiosInstance";
 
 const AddTests = () => {
       //User Must be loggen in 
@@ -27,7 +28,7 @@ const AddTests = () => {
         setFailure(null)
         console.log("submitting")
             //Post
-            axios.post('https://modcom.pythonanywhere.com/api/add_tests', {
+            axiosInstance.post('/add_tests', {
                 lab_id: lab_id,
                 test_name: test_name,
                 test_description: test_description,
@@ -35,12 +36,6 @@ const AddTests = () => {
                 test_discount: test_discount,
                 availability: availability,
                 more_info:more_info
-            }, {
-                headers: {
-                    //We provide the bearer Token
-                    Authorization: `Bearer ${refresh_token}`
-                }
-                
             })
             .then(function (response) {
                 console.log(response.data);

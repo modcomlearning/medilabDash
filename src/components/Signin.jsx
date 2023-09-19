@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios"
 import { styled } from "styled-components";
 import { Link, Navigate, useNavigate} from 'react-router-dom';
+import axiosInstance from "../helpers/axiosInstance";
 const Signin = () => {
     //hooks
     const navigation = useNavigate()// hook
@@ -19,13 +20,13 @@ const Signin = () => {
         setFailure(null)
         console.log("submitting")
             //Post
-            axios.post('https://modcom.pythonanywhere.com/api/lab_signin', {
+            axiosInstance.post('/lab_signin', {
                 email: email,
                 password:password
             })
                 .then(function (response) {
                 console.log("X"+response.data);
-                console.log("Y"+response.data.message.lab_id);
+                console.log("Y"+response.data.message);
                 console.log("RT" + response.data.refresh_token);
                   
                 //Assume Login Successfully
