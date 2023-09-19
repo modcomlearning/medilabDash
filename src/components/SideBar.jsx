@@ -4,6 +4,7 @@ import { AiOutlineAppstore,AiFillAccountBook, AiFillAlert, AiOutlineLogout } fro
 import {AiOutlineBank, AiOutlinePlusCircle, AiOutlineUser} from "react-icons/ai"
 import {AiTwotoneCopy}  from "react-icons/ai"
 import { Link } from "react-router-dom"
+import ReactLogout from '../helpers/ReactLogout';
 //sudo npm install react-router-dom@latest
 //style
 const Section = styled.section`
@@ -107,6 +108,7 @@ const Section = styled.section`
 //Style End here
 const SideBar = () => {
     //Hooks
+const { logout } = ReactLogout();
 const [currentLink, setCurrentLink] = useState(1)
     console.log("Current: "+currentLink)
     return ( 
@@ -157,8 +159,10 @@ const [currentLink, setCurrentLink] = useState(1)
                 <span><strong>Upgrade Now</strong></span>
             </div>
 
-            <div className="logout">
-                 <a href="">  <AiOutlineLogout/> Logout</a>
+            <div className="p-4">
+                <button onClick={logout} className="btn btn-dark btn-sm">
+                    <AiOutlineLogout /> Logout
+                </button>
             </div>
 
         </Section>

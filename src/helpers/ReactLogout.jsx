@@ -5,7 +5,9 @@ const ReactLogout = () => {
     const logout = () => {
         localStorage.clear();
         navigation("/signin")
-    }
+    };
+
+    return { logout }; // Export the logout function
 }
  
 export default ReactLogout;
