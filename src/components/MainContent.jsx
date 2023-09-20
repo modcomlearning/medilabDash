@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react';
 import styled from "styled-components"
 import Layout from '../helpers/Layout';
 import Main from '../styles/Main';
+//*** */
+import { useNavigate } from 'react-router-dom';
 const MainContent = () => {
+  
+   
     return ( 
         <div>
             <Layout/>
