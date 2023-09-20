@@ -4,9 +4,11 @@ import Layout from '../helpers/Layout';
 import Main from '../styles/Main';
 //*** */
 import { useNavigate } from 'react-router-dom';
+import CheckSession from '../helpers/CheckSession';
 const MainContent = () => {
-  
-   
+   //Protect
+    const { lab_name, lab_id, refresh_token } = CheckSession()
+    
     return ( 
         <div>
             <Layout/>

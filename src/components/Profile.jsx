@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import styled from "styled-components"
+import CheckSession from '../helpers/CheckSession';
 import Layout from '../helpers/Layout';
 import Main from '../styles/Main';
 const Profile = () => {
+    //Protect
+    const { lab_name, lab_id, refresh_token } = CheckSession()
     return ( 
         <div>
             <Layout/>

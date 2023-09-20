@@ -4,11 +4,14 @@ import axios from "axios";
 import Main from "../styles/Main";
 import Layout from "../helpers/Layout";
 import axiosInstance from "../helpers/axiosInstance";
+import CheckSession from "../helpers/CheckSession";
 
 const AddTests = () => {
+      //Protect
+    const { lab_name, lab_id, refresh_token } = CheckSession()
       //User Must be loggen in 
-      const lab_id = localStorage.getItem("lab_id")
-      const refresh_token = localStorage.getItem("refresh_token")
+      //const lab_id = localStorage.getItem("lab_id")
+      //const refresh_token = localStorage.getItem("refresh_token")
       //Hooks
         const [test_name, setName] = useState(null)
         const [test_description, setDescription] = useState(null)
