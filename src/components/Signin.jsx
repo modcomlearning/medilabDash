@@ -31,6 +31,7 @@ const Signin = () => {
                   
                 //Assume Login Successfully
                 localStorage.setItem("lab_id", response.data.message.lab_id);
+                localStorage.setItem("lab_name", response.data.message.lab_name);    
                 localStorage.setItem("refresh_token", response.data.refresh_token);
                 console.log("Saved1" + localStorage.getItem("lab_id")) 
                 console.log("Saved2"+localStorage.getItem("refresh_token"))     

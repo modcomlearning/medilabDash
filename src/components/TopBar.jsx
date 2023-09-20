@@ -6,9 +6,8 @@ import { AiTwotoneCopy } from "react-icons/ai"
 import { AiFillCalendar } from 'react-icons/ai';
 import Avatar from "../images/icon.png"
 const TobBar = () => {
-
-
-
+    //access labname from top bar
+    const lab_name = localStorage.getItem("lab_name")
     return (  
         <Nav>
           
@@ -21,7 +20,7 @@ const TobBar = () => {
             <div className="content">
                 <div className="date">
                     <AiFillCalendar />
-                    <span>Sept, 11, 2023</span>
+                    <span>User: { lab_name }</span>
                 </div>
 
                 <div className="icon">
@@ -32,7 +31,6 @@ const TobBar = () => {
                          <img src={Avatar} alt=""/>
                     </div>
                     
-
                 </div>
 
             </div>
