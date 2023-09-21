@@ -3,6 +3,7 @@ import { useState } from "react"
 import axiosInstance from "../helpers/axiosInstance"
 import CheckSession from "../helpers/CheckSession"
 import Layout from "../helpers/Layout"
+import Main from "../styles/Main"
 const LabTests = () => {
      //Protect
     const { lab_name, lab_id, refresh_token } = CheckSession()
@@ -25,17 +26,38 @@ const LabTests = () => {
     return ( 
         <div>
             <Layout />
-             <h1>Your Lab Tests</h1>
-              {lab_tests && lab_tests.map((test) => (
-                    <div className="single" key={test.test_id}>
-                        <h3>{test.test_name}</h3>
-                        <p>{test.test_description}</p>
-                        <hr />
-                     </div>    
-                ))}
+            <Main>
+                <table className="table table-striped bg-light p-5 m-1">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Cost</th>
+                        <th>Discount</th>
+                        <th>Available</th>
+                        <th>More</th>                    
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {lab_tests && lab_tests.map((test) => (
+                        <tr className="mt-5" key={test.test_id}>        
+                            <td>{test.test_name}</td>
+                            <td>{test.test_description}</td>
+                            <td>{test.test_cost}</td>
+                            <td>{test.test_discount}</td>
+                            <td>{test.availability}</td>
+                            <td>{test.more_info}</td>      
+                            <td><button className="btn btn-danger btn-sm">Remove</button></td>
+                            <td><button className="btn btn-warning btn-sm">Update</button></td>
+                        </tr>    
+                      ))}
+                    </tbody>
+                 </table>
+            
+            </Main>
         </div>
         
      );
 }
  
-export default LabTests;
+export default LabTests
