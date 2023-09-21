@@ -10,8 +10,10 @@ const CheckSession = () => {
         useEffect(() => {
             console.log("useEffect")
             //check if above are empty
+          
             if (!lab_name && !lab_id && !refresh_token) {
                 console.log("Works")
+                localStorage.clear();
                 return navigation("/signin")
             }
         }, [lab_name, lab_id, refresh_token, navigation]);
