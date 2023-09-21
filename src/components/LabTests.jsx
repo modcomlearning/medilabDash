@@ -18,9 +18,12 @@ const LabTests = () => {
             .then(function (response) {
                 console.log(response.data);
                 setLabTests(response.data)//important
+                setLoading(false)
             })
             .catch(function (error) {
-                 console.log(error);
+                console.log(error);
+                setError(error.message)
+                setLoading(false)
         })//end catch
     }, [lab_id]);// end useeffect
     return ( 
@@ -28,6 +31,8 @@ const LabTests = () => {
             <Layout />
             <Main>
                 <table className="table table-striped bg-light p-5 m-1">
+                     {loading && <div className="text-warning">Loading ... </div>}
+                     {error && <div className="text-danger"> Error occured. Try Later </div>}
                     <thead>
                     <tr>
                         <th>Name</th>
