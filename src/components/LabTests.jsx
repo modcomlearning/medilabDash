@@ -12,6 +12,7 @@ const LabTests = () => {
     console.log("Array "+typeof(lab_tests))
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
+    //Add this  below
     const [filteredData, setFilteredData] = useState([]); 
     //Search
     const [query, setQuery] = useState('')  // null
@@ -32,23 +33,25 @@ const LabTests = () => {
                 setLoading(false)
         })//end catch
     }, [lab_id]);// end useeffect
-        console.log("Here"+lab_tests)
-        //lab_tests can be accessed here
+
  
-    
+    //add this
     const handleLiveSearch = (value) => {
        //ABove value comes from the typing 
     setQuery(value); //query has something as long someone is searching
+    //check if lab tests are not empty
     const filtered = lab_tests && lab_tests.filter((item) =>
       item.test_name.toLowerCase().includes(value.toLowerCase())
     );
+        //update setFilteredData with filtered items
     setFilteredData(filtered);
-  };
+  };//end
 
     return ( 
         <div>
             <Layout />
             <Main>
+                {/* add handleLiveSearch function onChange below */}
                 <input type="text" placeholder="Search a test name" value={query}
                     onChange={(e) => handleLiveSearch(e.target.value)}
                 className = "form-control" /> 
@@ -67,6 +70,7 @@ const LabTests = () => {
                     </tr>
                     </thead>
                     <tbody>
+                        {/* add this filteredData */}
                     {filteredData && filteredData.map((test) => (
                         <tr className="mt-5" key={test.test_id}>        
                             <td>{test.test_name}</td>
