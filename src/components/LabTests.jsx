@@ -9,8 +9,13 @@ const LabTests = () => {
     const { lab_name, lab_id, refresh_token } = CheckSession()
     //hooks
     const [lab_tests, setLabTests] = useState(null) //Empty
+    console.log("Array "+typeof(lab_tests))
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
+    const [filteredData, setFilteredData] = useState([]); 
+    //Search
+    const [query, setQuery] = useState('')  // null
+
     useEffect(() => {
         axiosInstance.post("/view_lab_tests", {
             lab_id: lab_id
@@ -18,6 +23,7 @@ const LabTests = () => {
             .then(function (response) {
                 console.log(response.data);
                 setLabTests(response.data)//important
+                setFilteredData(response.data);
                 setLoading(false)
             })
             .catch(function (error) {
@@ -26,10 +32,27 @@ const LabTests = () => {
                 setLoading(false)
         })//end catch
     }, [lab_id]);// end useeffect
+        console.log("Here"+lab_tests)
+        //lab_tests can be accessed here
+ 
+    
+    const handleLiveSearch = (value) => {
+       //ABove value comes from the typing 
+    setQuery(value); //query has something as long someone is searching
+    const filtered = lab_tests && lab_tests.filter((item) =>
+      item.test_name.toLowerCase().includes(value.toLowerCase())
+    );
+    setFilteredData(filtered);
+  };
+
     return ( 
         <div>
             <Layout />
             <Main>
+                <input type="text" placeholder="Search a test name" value={query}
+                    onChange={(e) => handleLiveSearch(e.target.value)}
+                className = "form-control" /> 
+                
                 <table className="table table-striped bg-light p-5 m-1">
                      {loading && <div className="text-warning">Loading ... </div>}
                      {error && <div className="text-danger"> Error occured. Try Later </div>}
@@ -44,7 +67,7 @@ const LabTests = () => {
                     </tr>
                     </thead>
                     <tbody>
-                    {lab_tests && lab_tests.map((test) => (
+                    {filteredData && filteredData.map((test) => (
                         <tr className="mt-5" key={test.test_id}>        
                             <td>{test.test_name}</td>
                             <td>{test.test_description}</td>
