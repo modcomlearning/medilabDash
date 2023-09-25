@@ -12,6 +12,8 @@ import Signup from './components/Signup';
 import Signin from './components/Signin';
 import AddTests from './components/AddTests';
 import LabTests from './components/LabTests';
+import AddNurses from './components/AddNurses';
+
 const MyH1 = styled.h1`
    color: red;
 `
@@ -27,7 +29,8 @@ function App() {
             <Route path='/signin' element={<Signin />} ></Route>
             <Route path='/signup' element={<Signup />} ></Route>
             <Route path='/add_tests' element={<AddTests />} ></Route>
-            <Route path='/lab_tests' element={<LabTests />} ></Route>
+          <Route path='/lab_tests' element={<LabTests />} ></Route>
+          <Route path='/add_nurses' element={<AddNurses />} ></Route>
         </Routes>  
     
         </div>
