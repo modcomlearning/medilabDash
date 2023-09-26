@@ -21,9 +21,17 @@ const AddNurses = () => {
         const [loading, setLoading] = useState(false)
         const [success, setSuccess] = useState(null)
         const [failure, setFailure] = useState(null)
+        const [selected, setSelected] = useState('')
+    
+        //handle select
+    const handleSelect = (e) => { 
+ 
+             setSelected(e.target.value) //Update hook based on Selected radio button   
+        }//end
+        console.log("Selected  "+selected)
     
        //submit
- const submit = (e) => {
+         const submit = (e) => {
         e.preventDefault();
         setLoading(true)
         setSuccess(null)
@@ -42,16 +50,14 @@ const AddNurses = () => {
                 console.log(response.data);
                 setLoading(false)
                 setSuccess(response.data.message)
-                // setName(''); setDescription(''); setCost(''); setDiscount(''); setAvailability('');
-                // setInfo('');
-                //setEmail(''); setName(''); setPassword(''); setPhone(''); setPermit('');
+                setName(''); setGender(''); setEmail(''); setOthers(''); setOthers('');
+            
             })
             .catch(function (error) {
                 console.log(error.message);
                 setLoading(false)
                 setFailure(error.message);
             });
-
     }//End submit
 
     return (
@@ -70,12 +76,18 @@ const AddNurses = () => {
                                 <input type="text" placeholder="Enter Others" value={others}
                                     onChange={(e) => setOthers(e.target.value)} required
                                 className="form-control"/> <br />
+                              
+                                <label htmlFor="">Your Gender</label><br />
+                                <input type="radio" value='Male'
+                                onChange={handleSelect}
+                                checked={ selected ==='Male'} />  Male<br />
+                        
+                                 <input type="radio" value='Female'
+                                  onChange={handleSelect}
+                                  checked={ selected ==='Female'}/> Female<br />
+
                                 
-                                <input type="text" placeholder="Enter Gender" value={gender}
-                                    onChange={(e) => setGender(e.target.value)} required
-                                className="form-control"/> <br />
-                                
-                                <input type="text" placeholder="Enter Test Discount" value={email}
+                                <input type="text" placeholder="Enter Email" value={email}
                                     onChange={(e) => setEmail(e.target.value)} required
                                 className="form-control"/> <br />
                                 
@@ -95,4 +107,4 @@ const AddNurses = () => {
 }
  
 
-export default Add;
+export default AddNurses;
