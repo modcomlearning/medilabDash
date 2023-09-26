@@ -43,7 +43,7 @@ const AddNurses = () => {
                 surname: surname,
                 others: others,
                 email: email,
-                gender: gender,
+                gender: selected,
                 phone: phone
             })
             .then(function (response) {
