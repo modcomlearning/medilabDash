@@ -146,7 +146,7 @@ const [currentLink, setCurrentLink] = useState(1)
                         </li>
 
                         <li>
-                              <a href="/nurses"><AiFillAlert/>Nurses</a>
+                              <Link to="/nurses"><AiFillAlert/>Nurses</Link>
                         </li>
                     </ul>                    
                 </div>
