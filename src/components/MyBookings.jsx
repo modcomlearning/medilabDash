@@ -61,26 +61,47 @@ const MyBookings = () => {
                      {error && <div className="text-danger"> Error occured. Try Later </div>}
                     <thead>
                     <tr>
-                        <th>Invoice No</th>
+                       
                         <th>Date</th>
                         <th>Time</th>
                         <th>Member</th>
                         <th>Where Taken</th>
-                        <th>Test</th>                   
+                        <th>Test</th>       
+                        <th>Status</th>    
                     </tr>
                     </thead>
                     <tbody>
                         {/* add this filteredData */}
-                    {filteredData && filteredData.map((booking) => (
-                        <tr className="mt-5" key={booking.book_id}>   
-                            <td>{booking.invoice_no}</td>    
-                            <td>{booking.appointment_date}</td>
-                            <td>{booking.appointment_time}</td>
-                            <td>{booking.member.surname}</td>
-                            <td>{booking.where_taken}</td>
-                            <td>{booking.test_details.test_name}</td> 
-                            <td><button className="btn btn-danger btn-sm">Accept</button></td>
-                            <td><button className="btn btn-warning btn-sm">Decline</button></td>
+                        {filteredData && filteredData.map((booking) => (
+                            <tr className="mt-5" key={booking.book_id}>
+                           
+                                <td>{booking.appointment_date}</td>
+                                <td>{booking.appointment_time}</td>
+                                <td>{booking.member.surname}</td>
+                                <td>{booking.where_taken}</td>
+                                <td>{booking.test_details.test_name}</td>
+                                <td>
+                                    {booking.status === 'Pending' ? (
+                                        <td><button className="btn btn-warning btn-sm">Accept</button> <br /><br />
+                                            <button className="btn btn-danger btn-sm">Decline</button></td>
+                                    ) : booking.status === 'Allocated' ? (
+                                        <td><button className="btn btn-dark btn-sm disabled">Allocated</button></td>
+                                    ) : booking.status === 'Done' ? (
+                                        <td><button className="btn btn-success btn-sm">Completed</button></td>
+                                    ) : (
+                                        <td><button className="btn btn-info btn-sm"> --NaN-- </button></td>
+                                    )}
+                                </td>
+                                <td>
+                                    {booking.latitude === '' ? (
+                                         <td></td>
+                                    ): (
+                                        <td><button className = "btn btn-primary btn-sm"> Map </button></td>
+                                    )}
+                                   
+                            </td>
+                           
+                           
                         </tr>    
                       ))}
                     </tbody>

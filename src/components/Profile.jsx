@@ -14,8 +14,9 @@ const Profile = () => {
     const [error, setError] = useState(null)
 
     //use effect
+       const {instance}  = axiosInstance()
        useEffect(() => {
-        axiosInstance.post("/lab_profile", {
+        instance.post("/lab_profile", {
             lab_id: lab_id
         })
             .then(function (response) {
