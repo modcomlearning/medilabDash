@@ -11,7 +11,7 @@ const TobBar = () => {
     return (  
         <Nav>
           
-            <div className="search">
+           <div className="search">
                 <form action="">
                      <input type="text"  placeholder='Search'/>
                 </form>          
