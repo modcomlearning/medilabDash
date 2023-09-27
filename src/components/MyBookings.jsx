@@ -47,12 +47,12 @@ const MyBookings = () => {
     setFilteredData(filtered);
   };//end
 
-    
-    const handleOpenMap = (latitude, longitude) => {
+  //***Add this function for MAP, call it in Map button down there */  
+  const handleOpenMap = (latitude, longitude) => {
     const mapUrl = `https://www.google.com/maps?q=${latitude},${longitude}`;
     window.open(mapUrl, '_blank');
   };
-
+  
     return ( 
         <div>
             <Layout />
@@ -99,14 +99,19 @@ const MyBookings = () => {
                                     )}
                                 </td>
                                 <td>
+                                    {/* Chekc if there is a latitude */}
                                     {booking.latitude === '' ? (
                                          <td></td>
                                     ) : (
-                                        
-                                        <td><button onClick={()=> handleOpenMap(booking.latitude, booking.longitude)} className = "btn btn-primary btn-sm"> Map </button></td>
+                                        // below means there are coordinates, 
+                                        //Call function defined on Line 51 and pass latitude and longitude
+                                        //see below, save , run and click Map on Bookings should take you to Google Maps
+                                            <td><button onClick={() => handleOpenMap(booking.latitude,
+                                                booking.longitude)}
+                                                className="btn btn-primary btn-sm"> Map </button></td>
                                     )}
                                    
-                            </td>
+                                </td>
                            
                            
                         </tr>    
