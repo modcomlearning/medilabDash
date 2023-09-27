@@ -2,7 +2,8 @@ import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 
 const CheckSession = () => {
-      const navigation = useNavigate()//**
+    const navigation = useNavigate()//**
+    console.log("Loads")
     //useEffect runs at least  once when page loads   
         const lab_name = localStorage.getItem("lab_name")
         const lab_id = localStorage.getItem("lab_id")

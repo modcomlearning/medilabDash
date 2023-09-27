@@ -2,7 +2,9 @@ import { useState } from "react";
 import axios from "axios"
 import { styled } from "styled-components";
 import { Link } from "react-router-dom";
-import axiosInstance from "../helpers/axiosInstance";
+import Layout from "../helpers/Layout";
+import SideBar from "./SideBar";
+import axiosInstance2 from "../helpers/axiosInstance2";
 const Signup = () => {
     //hooks
     const [lab_name, setName] = useState(null)
@@ -22,7 +24,7 @@ const Signup = () => {
         setFailure(null)
         console.log("submitting")
             //Post
-            axiosInstance.post('/lab_signup', {
+            axiosInstance2.post('/lab_signup', {
                 lab_name: lab_name,
                 permit_id: permit_id,
                 email: email,
@@ -48,6 +50,7 @@ const Signup = () => {
     }//End submit
     return ( 
         <div className="form">
+       
              <Section>
            
               {loading  && <div className="loading"> Please Wait..</div>}
