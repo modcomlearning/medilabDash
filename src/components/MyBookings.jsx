@@ -47,6 +47,12 @@ const MyBookings = () => {
     setFilteredData(filtered);
   };//end
 
+    
+    const handleOpenMap = (latitude, longitude) => {
+    const mapUrl = `https://www.google.com/maps?q=${latitude},${longitude}`;
+    window.open(mapUrl, '_blank');
+  };
+
     return ( 
         <div>
             <Layout />
@@ -95,8 +101,9 @@ const MyBookings = () => {
                                 <td>
                                     {booking.latitude === '' ? (
                                          <td></td>
-                                    ): (
-                                        <td><button className = "btn btn-primary btn-sm"> Map </button></td>
+                                    ) : (
+                                        
+                                        <td><button onClick={()=> handleOpenMap(booking.latitude, booking.longitude)} className = "btn btn-primary btn-sm"> Map </button></td>
                                     )}
                                    
                             </td>
