@@ -25,8 +25,9 @@ const AddTests = () => {
         const [loading, setLoading] = useState(false)
         const [success, setSuccess] = useState(null)
         const [failure, setFailure] = useState(null)
-        if (lab_id) {
+     
         //submit
+      const {instance}  = axiosInstance()
         const submit = (e) => {
             e.preventDefault();
             setLoading(true)
@@ -34,7 +35,7 @@ const AddTests = () => {
             setFailure(null)
             console.log("submitting")
             //Post
-            axiosInstance.post('/add_tests', {
+            instance.post('/add_tests', {
                 lab_id: lab_id,
                 test_name: test_name,
                 test_description: test_description,
@@ -100,7 +101,7 @@ const AddTests = () => {
         
         );
 
-    }
+    
   
 }
 

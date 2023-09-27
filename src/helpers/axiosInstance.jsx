@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 //let person = Person()
-
+//We now have axiosInstance as a component
 const axiosInstance = () => {
   const refresh_token = localStorage.getItem("refresh_token")
   console.log("Loads6")
@@ -15,6 +15,6 @@ const axiosInstance = () => {
       'Authorization': `Bearer ${refresh_token}`
     },
   });
-  return instance;
+  return {instance};//return instance from line 10
 }
-export default axiosInstance;
+export default axiosInstance;//export component

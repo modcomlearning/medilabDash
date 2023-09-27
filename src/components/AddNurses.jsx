@@ -7,29 +7,30 @@ import axiosInstance from "../helpers/axiosInstance";
 import CheckSession from "../helpers/CheckSession";
 
 const AddNurses = () => {
-      //Protect
+    //Protect
     const { lab_name, lab_id, refresh_token } = CheckSession()
-      //User Must be loggen in 
-      //const lab_id = localStorage.getItem("lab_id")
-      //const refresh_token = localStorage.getItem("refresh_token")
-      //Hooks
-        const [surname, setName] = useState(null)
-        const [others, setOthers] = useState(null)
-        const [gender, setGender] = useState(null)
-        const [email, setEmail] = useState(null)
-        const [phone, setPhone] = useState(null)
-        const [loading, setLoading] = useState(false)
-        const [success, setSuccess] = useState(null)
-        const [failure, setFailure] = useState(null)
-        const [selected, setSelected] = useState('')
+    //User Must be loggen in 
+    //const lab_id = localStorage.getItem("lab_id")
+    //const refresh_token = localStorage.getItem("refresh_token")
+    //Hooks
+    const [surname, setName] = useState(null)
+    const [others, setOthers] = useState(null)
+    const [gender, setGender] = useState(null)
+    const [email, setEmail] = useState(null)
+    const [phone, setPhone] = useState(null)
+    const [loading, setLoading] = useState(false)
+    const [success, setSuccess] = useState(null)
+    const [failure, setFailure] = useState(null)
+    const [selected, setSelected] = useState('')
     
-        //handle select
-    const handleSelect = (e) => { 
+    //handle select
+    const handleSelect = (e) => {
  
-             setSelected(e.target.value) //Update hook based on Selected radio button   
-        }//end
-        console.log("Selected  "+selected)
+        setSelected(e.target.value) //Update hook based on Selected radio button   
+    }//end
+    console.log("Selected  " + selected)
     
+    const {instance}  = axiosInstance()
        //submit
          const submit = (e) => {
         e.preventDefault();
@@ -38,7 +39,7 @@ const AddNurses = () => {
         setFailure(null)
         console.log("submitting")
             //Post
-            axiosInstance.post('/add_nurse', {
+            instance.post('/add_nurse', {
                 lab_id: lab_id,
                 surname: surname,
                 others: others,
@@ -69,7 +70,7 @@ const AddNurses = () => {
                                 {loading  && <div className="text-warning"> Please Wait..</div>}
                                 {success && <div className="text-success"> {success}</div>}  
                                 {failure && <div className="text-danger"> { failure}</div>} 
-                                <input type="text" placeholder="Enter Test Name" value={surname}
+                                <input type="text" placeholder="Enter Name" value={surname}
                                     onChange={(e) => setName(e.target.value)} required
                                 className="form-control"/> <br /> 
                                 

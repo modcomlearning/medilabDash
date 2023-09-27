@@ -16,9 +16,9 @@ const LabTests = () => {
     const [filteredData, setFilteredData] = useState([]); 
     //Search
     const [query, setQuery] = useState('')  // null
-
+    const {instance}  = axiosInstance()
     useEffect(() => {
-        axiosInstance.post("/view_lab_tests", {
+        instance.post("/view_lab_tests", {
             lab_id: lab_id
         })
             .then(function (response) {

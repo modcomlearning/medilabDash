@@ -15,9 +15,9 @@ const MyBookings = () => {
     const [filteredData, setFilteredData] = useState([]); 
     //Search
     const [query, setQuery] = useState('')  // null
-
+  const {instance}  = axiosInstance()
     useEffect(() => {
-        axiosInstance.post("/view_bookings", {
+        instance.post("/view_bookings", {
             lab_id: lab_id
         })
             .then(function (response) {
