@@ -72,8 +72,8 @@ const MyBookings = () => {
                         <th>Time</th>
                         <th>Member</th>
                         <th>Where Taken</th>
-                        <th>Test</th>       
-                        <th>Status</th>    
+                        <th>Test</th>          
+                        <th>Inv No</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -86,6 +86,7 @@ const MyBookings = () => {
                                 <td>{booking.member.surname}</td>
                                 <td>{booking.where_taken}</td>
                                 <td>{booking.test_details.test_name}</td>
+                                <td>{booking.invoice_no}</td>
                                 <td>
                                     {booking.status === 'Pending' ? (
                                         <td><button className="btn btn-warning btn-sm">Accept</button> <br /><br />
@@ -112,8 +113,7 @@ const MyBookings = () => {
                                     )}
                                    
                                 </td>
-                           
-                           
+                        
                         </tr>    
                       ))}
                     </tbody>
