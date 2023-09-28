@@ -96,7 +96,12 @@ const MyBookings = () => {
                                 <td>{booking.invoice_no}</td>
                                 <td>
                                     {booking.status === 'Pending' ? (
-                                        <td><button className="btn btn-warning btn-sm">Accept</button> <br /><br />
+                                        <td><button className="btn btn-warning btn-sm"
+                                            onClick={() => {
+                                                setShowDialog(true);
+                                                setInvoice(booking.invoice_no)
+                                            }}>Assign</button> <br /><br />
+                                            
                                             <button className="btn btn-danger btn-sm">Decline</button></td>
                                     ) : booking.status === 'Allocated' ? (
                                         <td><button className="btn btn-dark btn-sm disabled">Allocated</button></td>
@@ -125,7 +130,7 @@ const MyBookings = () => {
                         ))}
                         <NursesDialog isOpen={show}
                             onClose={()=> setShowDialog(false)}
-                        invoice_no = {'INV-33434'}/>
+                        invoice_no = {invoice_no}/>
 
                     </tbody>
                  </table>
