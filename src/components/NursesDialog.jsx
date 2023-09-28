@@ -29,12 +29,19 @@ const NursesDialog = ({isOpen, onClose, invoice_no}) => {
         })
     },[lab_id]);
 
-
+    const custom = {
+        content: {
+            top: '15%',
+            left: '30%',
+            bottom: '40%'
+       }       
+    }//end
     return (  
         <Modal
             isOpen={isOpen}
             onRequestClose={onClose}
-            contentLabel="Nurses Popup">
+            contentLabel="Nurses Popup"
+            style={custom}>
             <h4>Assignment Section</h4>
             <div className="text-center">
                 Inv No: {invoice_no} <br /><br />
@@ -42,11 +49,12 @@ const NursesDialog = ({isOpen, onClose, invoice_no}) => {
                 <select className="form-control" value={selected}
                     onChange={handleSelection}>
                     <option value="">-- Select --</option>
-                    {nurses && nurses.map((nurse) => {
+                    {nurses && nurses.map((nurse) => (
                         <option key={nurse.nurse_id}>{nurse.surname} {nurse.others} </option>
-                    })}
+                    ))}
                 </select><br /><br />
-                <button className="btn btn-dark">Assign Nurse</button>
+                <button className="btn btn-dark">Assign Nurse</button> <br /><br />
+                <button onClick={onClose}>Close</button>
             </div>        
         </Modal>
     );
