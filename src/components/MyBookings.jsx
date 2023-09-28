@@ -4,6 +4,7 @@ import axiosInstance from "../helpers/axiosInstance"
 import CheckSession from "../helpers/CheckSession"
 import Layout from "../helpers/Layout"
 import Main from "../styles/Main"
+import NursesDialog from "./NursesDialog"
 const MyBookings = () => {
      //Protect
     const { lab_name, lab_id, refresh_token } = CheckSession()
@@ -13,6 +14,12 @@ const MyBookings = () => {
     const [error, setError] = useState(null)
     //Add this  below
     const [filteredData, setFilteredData] = useState([]); 
+
+    //hook for dialog open
+    const [show, setShowDialog] = useState(false);
+    const [invoice_no, setInvoice] = useState(null)
+
+    
     //Search
     const [query, setQuery] = useState('')  // null
   const {instance}  = axiosInstance()
@@ -113,9 +120,13 @@ const MyBookings = () => {
                                     )}
                                    
                                 </td>
-                        
+                         
                         </tr>    
-                      ))}
+                        ))}
+                        <NursesDialog isOpen={show}
+                            onClose={()=> setShowDialog(false)}
+                        invoice_no = {'INV-33434'}/>
+
                     </tbody>
                  </table>
             
