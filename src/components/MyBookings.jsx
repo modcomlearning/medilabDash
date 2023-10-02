@@ -128,6 +128,7 @@ const MyBookings = () => {
                          
                         </tr>    
                         ))}
+                
                         <NursesDialog isOpen={show}
                             onClose={()=> setShowDialog(false)}
                         invoice_no = {invoice_no}/>
