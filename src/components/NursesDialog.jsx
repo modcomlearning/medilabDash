@@ -12,12 +12,30 @@ const NursesDialog = ({isOpen, onClose, invoice_no}) => {
     const [nurses, setNurses] = useState([]) //Empty
     //below hook will show picked nurse as first option 
     const [selected, setSelected] = useState('');
+
+    const [selectedId, setSelectedId] = useState('');
+
     //update hook based on user selection, call it onChange in <select>
     const handleSelection = (e) => {
         setSelected(e.target.value);
     }//end
 
+    //Allocate  
     const { instance } = axiosInstance()
+    const Allocate = (selectedId, invoice_no) => {
+            //if selected id is empty
+            instance.post("/task_allocation", {
+                nurse_id: selectedId,
+                invoice_no:invoice_no
+            }).then(function (response) {
+                console.log("Response:", response);
+                alert("Allocated"+response.data.message)
+            }).catch(function (error) {
+                alert('Error'+error)
+            })
+    }//end
+    
+  
     useEffect(() => {
         instance.post("/view_nurses", {
             lab_id: lab_id
@@ -50,10 +68,12 @@ const NursesDialog = ({isOpen, onClose, invoice_no}) => {
                     onChange={handleSelection}>
                     <option value="">-- Select --</option>
                     {nurses && nurses.map((nurse) => (
-                        <option key={nurse.nurse_id}>{nurse.surname} {nurse.others} </option>
+                        <option onClick={()=>setSelectedId(nurse.nurse_id)}   key={nurse.nurse_id}>{nurse.surname} {nurse.others} </option>
                     ))}
                 </select><br /><br />
-                <button className="btn btn-dark">Assign Nurse</button> <br /><br />
+                Selected: {selectedId} and {invoice_no}
+                <button className="btn btn-dark"
+                onClick={()=>Allocate(selectedId, invoice_no)}>Assign Nurse</button> <br /><br />
                 <button onClick={onClose}>Close</button>
             </div>        
         </Modal>
