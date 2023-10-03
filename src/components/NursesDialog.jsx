@@ -18,12 +18,12 @@ const NursesDialog = ({isOpen, onClose, invoice_no}) => {
     //update hook based on user selection, call it onChange in <select>
     const handleSelection = (e) => {
         setSelected(e.target.value);
+        setSelectedId(e.target.value);
     }//end
 
     //Allocate  
     const { instance } = axiosInstance()
     const Allocate = (selectedId, invoice_no) => {
-       
             //if selected id is empty
             instance.post("/task_allocation", {
                 nurse_id: selectedId,
@@ -71,7 +71,7 @@ const NursesDialog = ({isOpen, onClose, invoice_no}) => {
                     onChange={handleSelection}>
                     <option value="">-- Select --</option>
                     {nurses && nurses.map((nurse) => (
-                        <option onClick={()=>setSelectedId(nurse.nurse_id)}   key={nurse.nurse_id}>{nurse.surname} {nurse.others} </option>
+                        <option  key={nurse.nurse_id} value={nurse.nurse_id}>{nurse.surname} {nurse.others}</option>
                     ))}
                 </select><br /><br />
                 Selected: {selectedId} and {invoice_no}  <br />
