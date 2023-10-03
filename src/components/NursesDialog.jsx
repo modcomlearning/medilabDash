@@ -23,6 +23,7 @@ const NursesDialog = ({isOpen, onClose, invoice_no}) => {
     //Allocate  
     const { instance } = axiosInstance()
     const Allocate = (selectedId, invoice_no) => {
+       
             //if selected id is empty
             instance.post("/task_allocation", {
                 nurse_id: selectedId,
@@ -54,6 +55,8 @@ const NursesDialog = ({isOpen, onClose, invoice_no}) => {
             bottom: '40%'
        }       
     }//end
+
+
     return (  
         <Modal
             isOpen={isOpen}
@@ -71,13 +74,27 @@ const NursesDialog = ({isOpen, onClose, invoice_no}) => {
                         <option onClick={()=>setSelectedId(nurse.nurse_id)}   key={nurse.nurse_id}>{nurse.surname} {nurse.others} </option>
                     ))}
                 </select><br /><br />
-                Selected: {selectedId} and {invoice_no}
-                <button className="btn btn-dark"
-                onClick={()=>Allocate(selectedId, invoice_no)}>Assign Nurse</button> <br /><br />
-                <button onClick={onClose}>Close</button>
+                Selected: {selectedId} and {invoice_no}  <br />
+                
+                {selectedId && (
+                    <button className="btn btn-dark btn-sm"
+                        onClick={handleAllocate}>
+                    Assign Nurse
+                </button>
+                )} <br /> <br />
+
+                <button className="btn btn-dark btn-sm" onClick={onClose}>Close</button>
             </div>        
         </Modal>
     );
+    //function
+    function handleAllocate() {
+        const confirmed = window.confirm('Are you sure you want to assign the nurse?');
+        if (confirmed) {
+            Allocate(selectedId, invoice_no);
+        }
+    }//end
+
 }
  
 export default NursesDialog;
