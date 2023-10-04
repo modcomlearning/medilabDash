@@ -47,47 +47,69 @@ const Nurses = () => {
     setFilteredData(filtered);
   };//end
 
-    return ( 
+    return (
         <div>
             <Layout />
             <Main>
                 {/* add handleLiveSearch function onChange below */}
                 <input type="text" placeholder="Search a surname/Email" value={query}
                     onChange={(e) => handleLiveSearch(e.target.value)}
-                className = "form-control" /> 
+                    className="form-control" />
                 
                 <table className="table table-striped bg-light p-5 m-1">
-                     {loading && <div className="text-warning">Loading ... </div>}
-                     {error && <div className="text-danger"> Error occured. Try Later </div>}
+                    {loading && <div className="text-warning">Loading ... </div>}
+                    {error && <div className="text-danger"> Error occured. Try Later </div>}
                     <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Others</th>
-                        <th>Email</th>
-                        {/* <th>Phone</th> */}
-                        <th>Gender</th>                   
-                    </tr>
+                        <tr>
+                            <th>Name</th>
+                            <th>Others</th>
+                            <th>Email</th>
+                            {/* <th>Phone</th> */}
+                            <th>Gender</th>
+                        </tr>
                     </thead>
                     <tbody>
                         {/* add this filteredData */}
-                    {filteredData && filteredData.map((nurse) => (
-                        <tr className="mt-5" key={nurse.nurse_id}>        
-                            <td>{nurse.surname}</td>
-                            <td>{nurse.others}</td>
-                            <td>{nurse.email}</td>
-                            {/* <td>{nurse.phone}</td> */}
-                            <td>{nurse.gender}</td> 
-                            <td><button className="btn btn-danger btn-sm">Remove</button></td>
-                            <td><button className="btn btn-warning btn-sm">Update</button></td>
-                        </tr>    
-                      ))}
+                        {filteredData && filteredData.map((nurse) => (
+                            <tr className="mt-5" key={nurse.nurse_id}>
+                                <td>{nurse.surname}</td>
+                                <td>{nurse.others}</td>
+                                <td>{nurse.email}</td>
+                                {/* <td>{nurse.phone}</td> */}
+                                <td>{nurse.gender}</td>
+                                <td><button className="btn btn-danger btn-sm"
+                                    onClick={() => handleDelete(nurse.nurse_id)}>Remove</button></td>
+                                <td><button className="btn btn-warning btn-sm">Update</button></td>
+                            </tr>
+                        ))}
                     </tbody>
-                 </table>
+                </table>
             
             </Main>
         </div>
-        
-     );
+    );
+       //function
+    function handleDelete(nurse_id) {    
+        const confirmed = window.confirm('Are you sure?');
+        if (confirmed) {
+                console.log("Nurse id " + nurse_id) 
+                Delete(nurse_id);
+            }
+    }//end fun
+
+
+    function Delete(nurse_id) {
+        instance.delete(`/delete_nurse?nurse_id=${nurse_id}`)
+            .then(function (response) {
+                alert(response.data.message)
+                //TODO reload nurses
+            }).catch(function (error) {
+                alert(error.message)
+            })
+    }//end
+    //Charts in JS,     Chart js, fusion charts 
+
+
 }
  
 export default Nurses
