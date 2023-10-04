@@ -4,17 +4,18 @@ import Main from "../styles/Main";
 import axiosInstance from "../helpers/axiosInstance";
 import CheckSession from "../helpers/CheckSession";
 import Modal from 'react-modal'
+import { useNavigate } from "react-router-dom";
 //Prop is passing data from 1 component to another
-const NursesDialog = ({isOpen, onClose, invoice_no}) => {
+const NursesDialog = ({ isOpen, onClose, invoice_no }) => {
+    const navigation = useNavigate();
     //check session
     const { lab_name, lab_id, refresh_token } = CheckSession()
     //hook 
     const [nurses, setNurses] = useState([]) //Empty
     //below hook will show picked nurse as first option 
     const [selected, setSelected] = useState('');
-
     const [selectedId, setSelectedId] = useState('');
-
+    const [loading, setLoading] = useState(false)
     //update hook based on user selection, call it onChange in <select>
     const handleSelection = (e) => {
         setSelected(e.target.value);
@@ -24,15 +25,20 @@ const NursesDialog = ({isOpen, onClose, invoice_no}) => {
     //Allocate  
     const { instance } = axiosInstance()
     const Allocate = (selectedId, invoice_no) => {
+            setLoading(true)
             //if selected id is empty
             instance.post("/task_allocation", {
                 nurse_id: selectedId,
                 invoice_no:invoice_no
             }).then(function (response) {
                 console.log("Response:", response);
-                alert("Allocated"+response.data.message)
+                setLoading(false)
+                alert("Allocated" + response.data.message)
+                navigation("/mybookings")
             }).catch(function (error) {
-                alert('Error'+error)
+                setLoading(false)
+                alert('Error' + error.message)
+                navigation("/mybookings")
             })
     }//end
     
@@ -55,7 +61,10 @@ const NursesDialog = ({isOpen, onClose, invoice_no}) => {
             bottom: '40%'
        }       
     }//end
-
+    const closeDialog = () => {
+        console.log()
+        navigation("/mybookings")
+    }
 
     return (  
         <Modal
@@ -75,7 +84,7 @@ const NursesDialog = ({isOpen, onClose, invoice_no}) => {
                     ))}
                 </select><br /><br />
                 Selected: {selectedId} and {invoice_no}  <br />
-                
+                {loading  && <div className="text-warning"> Please Wait..</div>}
                 {selectedId && (
                     <button className="btn btn-dark btn-sm"
                         onClick={handleAllocate}>
@@ -87,6 +96,8 @@ const NursesDialog = ({isOpen, onClose, invoice_no}) => {
             </div>        
         </Modal>
     );
+
+   
     //function
     function handleAllocate() {
         const confirmed = window.confirm('Are you sure you want to assign the nurse?');
@@ -94,6 +105,9 @@ const NursesDialog = ({isOpen, onClose, invoice_no}) => {
             Allocate(selectedId, invoice_no);
         }
     }//end
+   
+   
+
 
 }
  

@@ -79,7 +79,8 @@ const LabTests = () => {
                             <td>{test.test_discount}</td>
                             <td>{test.availability}</td>
                             <td>{test.more_info}</td>      
-                            <td><button className="btn btn-danger btn-sm">Remove</button></td>
+                            <td><button className="btn btn-danger btn-sm"
+                            onClick={()=> handleDelete(test.test_id)}>Remove</button></td>
                             <td><button className="btn btn-warning btn-sm">Update</button></td>
                         </tr>    
                       ))}
@@ -90,6 +91,29 @@ const LabTests = () => {
         </div>
         
      );
-}
+      //function
+    function handleDelete(test_id) {    
+        const confirmed = window.confirm('Are you sure?');
+        if (confirmed) {
+                console.log("Test id " + test_id) 
+                Delete(test_id);
+            }
+    }//end fun
+
+    function Delete(test_id) {
+        instance.delete(`/delete_test?test_id=${test_id}`)
+            .then(function (response) {
+                alert(response.data.message)
+                //TODO reload lab tests
+            }).catch(function (error) {
+                alert(error.message)
+            })
+    }//end
+//button.setOnClickListenter(click:)
+
+
+    
+    }//end component
+    
  
 export default LabTests
