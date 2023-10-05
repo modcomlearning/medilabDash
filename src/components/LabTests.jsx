@@ -4,6 +4,7 @@ import axiosInstance from "../helpers/axiosInstance"
 import CheckSession from "../helpers/CheckSession"
 import Layout from "../helpers/Layout"
 import Main from "../styles/Main"
+import TestUpdate from "./TestUpdate"
 const LabTests = () => {
      //Protect
     const { lab_name, lab_id, refresh_token } = CheckSession()
@@ -14,6 +15,19 @@ const LabTests = () => {
     const [error, setError] = useState(null)
     //Add this  below
     const [filteredData, setFilteredData] = useState([]); 
+
+
+    //Details
+    const [test_id, setId] = useState('')
+    const [test_name, setName] = useState('')
+    const [test_description, setDescription] = useState('')
+    const [test_cost, setCost] = useState('')
+    const [test_discount, setDiscount] = useState('')
+    const [availability, setAvailability] = useState('')
+    const [more_info, setInfo] = useState('')
+    const [show, setShowDialog] = useState(false);
+    //above hooks will be updated and sent to dialog
+
     //Search
     const [query, setQuery] = useState('')  // null
     const {instance}  = axiosInstance()
@@ -81,12 +95,33 @@ const LabTests = () => {
                             <td>{test.more_info}</td>      
                             <td><button className="btn btn-danger btn-sm"
                             onClick={()=> handleDelete(test.test_id)}>Remove</button></td>
-                            <td><button className="btn btn-warning btn-sm">Update</button></td>
+                            <td><button className="btn btn-warning btn-sm"
+                                onClick={() => {
+                                    setId(test.test_id);
+                                    setName(test.test_name);
+                                    setDescription(test.test_description);
+                                    setCost(test.test_cost);
+                                    setDiscount(test.test_discount);
+                                    setAvailability(test.availability);
+                                    setInfo(test.more_info);
+                                    setShowDialog(true);
+                            }}>Update</button></td>
                         </tr>    
-                      ))}
+                    ))}
+                        {/* Props - passing data to Dialog component */}
+                        <TestUpdate isOpen={show}
+                            onClose={() => setShowDialog(false)}
+                            test_id={test_id}
+                            test_name={test_name}
+                            test_description={test_description}
+                            test_cost={test_cost}
+                            test_discount={test_discount}
+                            availability={availability}
+                            more_info={more_info}/>
+                            
+
                     </tbody>
                  </table>
-            
             </Main>
         </div>
         
