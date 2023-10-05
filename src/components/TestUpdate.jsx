@@ -1,5 +1,6 @@
 import Modal from 'react-modal'
 import { useState } from 'react'
+import axiosInstance from '../helpers/axiosInstance'
 const TestUpdate = ({ isOpen, onClose, test_id, test_name, test_description,
     test_cost, test_discount, availability, more_info }) => {
         const custom = {
@@ -19,6 +20,30 @@ const TestUpdate = ({ isOpen, onClose, test_id, test_name, test_description,
         const [avail, setAvailability] = useState(availability)
         const [info, setInfo] = useState(more_info)
 
+    
+    const {instance}  = axiosInstance()
+    const submit = () => {
+        setLoading(true)
+        instance.put("/update_nurse", {
+            test_id: test_id,
+            test_name: name,
+            test_description: description,
+            test_cost: cost,
+            test_discount: discount,
+            availability: avail,
+            more_info: info
+        }).then(function (response) {
+            alert(response.data.message)
+            setLoading(false)
+        }).catch(function (error) {
+            alert(error.message)
+            setLoading(false)
+        });
+    }//end
+    
+    
+    
+    
     return (
         <Modal
             isOpen={isOpen}
@@ -26,7 +51,7 @@ const TestUpdate = ({ isOpen, onClose, test_id, test_name, test_description,
             style={custom}
             contentLabel="Nurses Popup">
             
-            <form  className="card shadow p-4">
+            <form onSubmit={submit} className="card shadow p-4">
                         <div className="card-body">
                             {loading && <div className="text-warning"> Please Wait..</div>}
                             {success && <div className="text-success"> {success}</div>}
