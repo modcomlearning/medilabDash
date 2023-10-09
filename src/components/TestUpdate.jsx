@@ -1,5 +1,5 @@
 import Modal from 'react-modal'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import axiosInstance from '../helpers/axiosInstance'
 const TestUpdate = ({ isOpen, onClose, test_id, test_name, test_description,
     test_cost, test_discount, availability, more_info }) => {
@@ -10,39 +10,61 @@ const TestUpdate = ({ isOpen, onClose, test_id, test_name, test_description,
             bottom: '20%'
        }//end       
     }//end
+
+        console.log("ID " + test_id);
+        console.log("Test name:  " + test_name);
+
         const [loading, setLoading] = useState(false)
         const [success, setSuccess] = useState(null)
         const [failure, setFailure] = useState(null)
-        const [name, setName] = useState(test_name)
-        const [description, setDesription] = useState(test_description)
-        const [cost, setCost] = useState(test_cost)
-        const [discount, setDiscount] = useState(test_discount)
-        const [avail, setAvailability] = useState(availability)
-        const [info, setInfo] = useState(more_info)
-
+        const [name, setName] = useState(null)
+        const [description, setDesription] = useState(null)
+        const [cost, setCost] = useState(null)
+        const [discount, setDiscount] = useState(null)
+        const [avail, setAvailability] = useState(null)
+        const [info, setInfo] = useState(null)
     
-    const {instance}  = axiosInstance()
-    const submit = () => {
-        setLoading(true)
-        instance.put("/update_nurse", {
-            test_id: test_id,
+
+        //Update hooks
+        const update = () => {
+            setName(test_name)
+            setDesription(test_description)
+            setCost(test_cost)
+            setDiscount(test_discount)
+            setAvailability(availability)
+            setInfo(more_info)
+        }//end 
+        useEffect(()=>{
+            update()
+        }, [test_name, test_description, test_cost,
+            test_discount, availability, more_info])
+
+        const request = {
+            test_id:test_id,
             test_name: name,
             test_description: description,
             test_cost: cost,
             test_discount: discount,
             availability: avail,
             more_info: info
-        }).then(function (response) {
-            alert(response.data.message)
-            setLoading(false)
-        }).catch(function (error) {
-            alert(error.message)
-            setLoading(false)
-        });
-    }//end
+        }
     
+        const {instance}  = axiosInstance()
+            const submit = (e) => {
+                e.preventDefault(); 
+                
+            console.log("Works")
+            setLoading(true)
+            instance.put("/update_nurse", request).then(function (response) {
+                alert(response.data.message)
+                setLoading(false)
+            }).catch(function (error) {
+                alert(error.message)
+                setLoading(false)
+            });
+        }//end
     
-    
+
     
     return (
         <Modal
