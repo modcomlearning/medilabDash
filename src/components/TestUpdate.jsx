@@ -11,9 +11,6 @@ const TestUpdate = ({ isOpen, onClose, test_id, test_name, test_description,
        }//end       
     }//end
 
-        console.log("ID " + test_id);
-        console.log("Test name:  " + test_name);
-
         const [loading, setLoading] = useState(false)
         const [success, setSuccess] = useState(null)
         const [failure, setFailure] = useState(null)
@@ -51,11 +48,9 @@ const TestUpdate = ({ isOpen, onClose, test_id, test_name, test_description,
     
         const {instance}  = axiosInstance()
             const submit = (e) => {
-                e.preventDefault(); 
-                
-            console.log("Works")
+            e.preventDefault(); 
             setLoading(true)
-            instance.put("/update_nurse", request).then(function (response) {
+                instance.get("/update_test", { params: request}).then(function (response) {
                 alert(response.data.message)
                 setLoading(false)
             }).catch(function (error) {
