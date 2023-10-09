@@ -48,8 +48,9 @@ const TestUpdate = ({ isOpen, onClose, test_id, test_name, test_description,
     
         const {instance}  = axiosInstance()
             const submit = (e) => {
-            e.preventDefault(); 
-            setLoading(true)
+                e.preventDefault(); 
+                setLoading(true)
+                //  this APi endpoint receives data with Params not Json 
                 instance.get("/update_test", { params: request}).then(function (response) {
                 alert(response.data.message)
                 setLoading(false)
