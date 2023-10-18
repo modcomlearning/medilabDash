@@ -6,6 +6,7 @@ import Main from '../styles/Main';
 import { useNavigate } from 'react-router-dom';
 import CheckSession from '../helpers/CheckSession';
 import axiosInstance from '../helpers/axiosInstance';
+import MyPieChart from '../plots/MyPieChart';
 const MainContent = () => {
    //Protect
     const { lab_name, lab_id, refresh_token } = CheckSession()
@@ -36,8 +37,10 @@ const MainContent = () => {
 
     return ( 
         <div>
+            
             <Layout/>
             <Main>
+               
                 <div className="main">
                     <h1>Dashboard</h1>
                     <div class = "row">
@@ -66,6 +69,14 @@ const MainContent = () => {
                             </div>
                          </div>
                     </div>
+
+                    <div className='row'>
+                        <div className='col-md-6'>
+                             <MyPieChart/>
+                        </div>
+                    </div>
+
+                  
                 </div>
             </Main>
         </div>
