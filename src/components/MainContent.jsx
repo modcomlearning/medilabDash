@@ -70,8 +70,11 @@ const MainContent = () => {
                          </div>
                     </div>
 
-                    <div className='row'>
-                        <div className='col-md-6'>
+                    <div className='row ms-1 mt-5'>
+                        <div className='col-md-5 card shadow me-3 ms-4'>
+                             <MyPieChart/>
+                        </div>
+                         <div className='col-md-5 card shadow'>
                              <MyPieChart/>
                         </div>
                     </div>
