@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import CheckSession from '../helpers/CheckSession';
 import axiosInstance from '../helpers/axiosInstance';
 import MyPieChart from '../plots/MyPieChart';
+import MyBarChart from '../plots/MyBarChart';
 const MainContent = () => {
    //Protect
     const { lab_name, lab_id, refresh_token } = CheckSession()
@@ -28,7 +29,6 @@ const MainContent = () => {
                 setPending(response.data.pending)
                 setAverage(response.data.average)
                 console.log("hellooo"+num_of_nurses)
-
             })
             .catch(function (error) {
                 console.log(error);
@@ -76,7 +76,7 @@ const MainContent = () => {
                              <MyPieChart/>
                         </div>
                          <div className='col-md-5 card shadow'>
-                             <MyPieChart/>
+                            <MyBarChart/>
                         </div>
                     </div>
 

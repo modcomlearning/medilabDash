@@ -57,7 +57,7 @@ const MyPieChart = () => {
             data={data}
             cx="50%"
             cy="50%"
-            labelLine={false}
+            labelLine={true}
             label={renderCustomizedLabel}
             outerRadius={100}
             fill="#8884d8"
