@@ -27,6 +27,7 @@ const MainContent = () => {
                 setNumTests(response.data.num_of_tests)
                 setPending(response.data.pending)
                 setAverage(response.data.average)
+                console.log("hellooo"+num_of_nurses)
 
             })
             .catch(function (error) {
