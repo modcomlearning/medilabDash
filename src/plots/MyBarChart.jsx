@@ -48,12 +48,10 @@ const data = [
 
 const MyBarChart = () => {
     return (
-        <BarChart width={350} height={350} data={data}>
+        <BarChart width={350} height={350} data={data} Legend>
           <Bar dataKey="uv" fill="#8884d8" />
         </BarChart>
     );
-
 }
-
 
 export default MyBarChart;

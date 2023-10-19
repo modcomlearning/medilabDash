@@ -76,7 +76,7 @@ const MainContent = () => {
                              <MyPieChart/>
                         </div>
                          <div className='col-md-5 card shadow'>
-                            <MyBarChart/>
+                             <MyBarChart/>
                         </div>
                     </div>
 
