@@ -1,15 +1,13 @@
 import React from 'react';
 import { PieChart, Pie, Cell , ResponsiveContainer} from 'recharts';
-
+import { useState, useEffect } from 'react';
+import axiosInstance from '../helpers/axiosInstance';
+import CheckSession from '../helpers/CheckSession';
 	// Sample data
-	const data = [
-		{ name: 'Geeksforgeeks', students: 400 },
-		{ name: 'Technical scripter', students: 700 },
-		{ name: 'Geek-i-knack', students: 200 },
-		{ name: 'Geek-o-mania', students: 1000 }
-    ];
-    
-  const COLORS = ['#0088fe', '#00c49f', '#ffbb28', '#ff8042'];
+  
+ 
+
+  const COLORS = ['#0088fe', '#00c49f', '#ffbb28'];
   const RADIAN = Math.PI / 180;
   const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
   const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
@@ -23,6 +21,30 @@ import { PieChart, Pie, Cell , ResponsiveContainer} from 'recharts';
    );
   }
 const MyPieChart = () => {
+
+  //static Array 
+   const { lab_name, lab_id, refresh_token } = CheckSession() //get Lab_id ..
+   const [data, setData] = useState([])  //empty Array Hook to Update Later
+   const {instance}  = axiosInstance()
+    useEffect(() => {
+        instance.post("/pie1", {
+            lab_id: lab_id
+        })
+            .then(function (response) {
+                console.log(response);
+                setData(response.data)//important to Update Array
+               
+            })
+            .catch(function (error) {
+                alert(error.message);
+        })//end catch
+    }, [lab_id]);// end useeffect   
+  
+    console.log("Our data "+data)
+
+
+
+
 
   const chartStyle = {
     width: '100%', // 50% of the parent container's width
@@ -39,7 +61,7 @@ const MyPieChart = () => {
             label={renderCustomizedLabel}
             outerRadius={100}
             fill="#8884d8"
-            dataKey="students"
+            dataKey="Count"
           >
             {data.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
